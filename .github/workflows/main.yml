@@ -38,3 +38,17 @@ jobs:
           tags: |
             jonasrgrigolo/rotten-potatoes:latest
             jonasrgrigolo/rotten-potatoes:${{ github.run_number }}
+  cd:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: Azure Kubernetes set context
+        uses: Azure/aks-set-context@v1.1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}' # Azure credentials
+          resource-group: kubernetes-bootcamp
+          cluster-name: kubernetes-bootcamp-cluster
